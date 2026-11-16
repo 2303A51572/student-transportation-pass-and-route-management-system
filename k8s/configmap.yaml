@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: transport-config
+  namespace: transport-system
+data:
+  PORT: "5000"
+  NODE_ENV: "production"
+  MONGODB_URI: "mongodb://mongodb-service:27017/transport_db"
+  JWT_EXPIRE: "7d"
+  CORS_ORIGIN: "*"
