@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const path = require('path');
+require('dotenv').config();
+require('dotenv').config({ path: path.join(__dirname, '../.env') });
 
 let mongodInstance = null;
 
@@ -9,8 +12,8 @@ const connectDB = async () => {
     // Attempt standard connection first with reasonable timeout
     mongoose.set('strictQuery', false);
     await mongoose.connect(uri, {
-      serverSelectionTimeoutMS: 3000,
-      connectTimeoutMS: 3000
+      serverSelectionTimeoutMS: 10000,
+      connectTimeoutMS: 10000
     });
     console.log(`[MongoDB] Connected successfully to: ${uri}`);
   } catch (err) {

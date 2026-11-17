@@ -46,7 +46,8 @@ const Login = () => {
         navigate('/');
       })
       .catch((err) => {
-        toast.error(err.response?.data?.message || 'Login failed. Please seed the database.');
+        const msg = err.response?.data?.message || (err.message === 'Network Error' || !err.response ? 'Cannot reach server. Please ensure backend is running.' : 'Authentication failed.');
+        toast.error(msg);
       });
   };
 
