@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path');
+const fs = require('fs');
 const { connectDB } = require('./config/db');
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 
@@ -43,7 +45,20 @@ app.use('/api/trips', require('./routes/tripRoutes'));
 app.use('/api/notifications', require('./routes/notificationRoutes'));
 app.use('/api/transport-managers', require('./routes/managerRoutes'));
 
-// 404 & Error Handling
+// Serve frontend static assets if built
+const frontendDist = path.join(__dirname, '../frontend/dist');
+if (fs.existsSync(frontendDist)) {
+  console.log(`[Frontend] Serving static production build from: ${frontendDist}`);
+  app.use(express.static(frontendDist));
+  app.get('*', (req, res, next) => {
+    if (req.originalUrl.startsWith('/api')) {
+      return next();
+    }
+    res.sendFile(path.join(frontendDist, 'index.html'));
+  });
+}
+
+// 404 & Error Handling for API routes or unserved paths
 app.use(notFound);
 app.use(errorHandler);
 

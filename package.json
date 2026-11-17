@@ -1,0 +1,22 @@
+{
+  "name": "student-transportation-pass-and-route-management-system",
+  "version": "1.0.0",
+  "description": "Student Transportation Pass and Route Management System - B.Tech Project by ETURI BALAJI (2303A51572)",
+  "private": true,
+  "main": "backend/server.js",
+  "scripts": {
+    "install:backend": "npm --prefix backend install",
+    "install:frontend": "npm --prefix frontend install",
+    "install:all": "npm --prefix backend install && npm --prefix frontend install",
+    "build:frontend": "npm --prefix frontend run build",
+    "build": "npm --prefix backend install && npm --prefix frontend install && npm --prefix frontend run build",
+    "start": "node backend/server.js",
+    "seed": "node backend/seed/seedData.js",
+    "postinstall": "npm --prefix backend install && npm --prefix frontend install && npm --prefix frontend run build"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "ETURI BALAJI (2303A51572)",
+  "license": "ISC"
+}
